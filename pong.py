@@ -1,5 +1,10 @@
 import pygame
 from random import uniform
+from time import sleep
+
+setting_win = (700, 500)
+setting_board = (30, 300)
+
 
 class Board(pygame.Rect):
     def __init__(self, x, y, width, height, color, speed, name= "playerj,hsbg,d"):
@@ -75,3 +80,21 @@ class Ball(pygame.Rect):
         self.y += self.SPEED_Y
         self.COUNT += 1
         
+
+def check_goal(ball, player_left, player_right):
+    if ball.x < 10:
+        player_right.SCORE += 1
+        start(ball, player_left, player_right)
+    elif ball.x > 700 - 10 - ball.RADIUS * 2:
+        player_left.SCORE += 1
+        start(ball, player_left, player_right)
+
+def start(ball, player_left, player_right):
+    player_left.y = setting_win[1] // 2 - setting_board[1] // 2
+    player_right.y = setting_win[1] // 2 - setting_board[1] // 2
+    ball.x = setting_win[0] // 2 - 20
+    ball.y = setting_win[1] // 2 - 20
+    ball.SPEED_X = ball.SPEED
+    ball.SPEED_Y = 0
+    pygame.display.flip()
+    sleep(2)

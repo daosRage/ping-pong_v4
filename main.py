@@ -5,9 +5,6 @@ from PyQt5.QtWidgets import QInputDialog, QApplication
 app = QApplication([])
 pygame.init()
 
-setting_win = (700, 500)
-setting_board = (30, 300)
-
 window = pygame.display.set_mode(setting_win)
 pygame.display.set_caption("PONG")
 
@@ -37,6 +34,7 @@ while game:
     player_left.move(window)
     player_right.move(window)
     ball.move(window, player_left, player_right)
+    check_goal(ball, player_left, player_right)
 
 
     
